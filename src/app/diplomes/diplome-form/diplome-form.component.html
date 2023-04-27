@@ -1,0 +1,85 @@
+<div id="comp-render" >
+	<br>
+	<br>
+   <button class="btn btn-outline-secondary " style=" margin-left: 570px;" routerLink="/admin/diplome" >Back to list</button>
+   <div class="row" style="margin-top:5%" >
+<div class="col-lg-6" >
+		<div class="card-body p-md-5 text-black ">
+		 <!-- <div class="mt-2" style="align-items: center;">-->
+			<h1 style="color:rgb(141, 96, 154) ; margin-left:  120px; ">Ajouter Diplome</h1>
+		
+
+		  <form  #f="ngForm"  (ngSubmit)="onsubmit()">
+
+			<div class="form-group">
+			  <label for="nameDiplome"> Nom Diplome  :</label>
+			  <input type="text" #nameDiplome="ngModel" [(ngModel)]="diplome.nameDiplome"  required  minlength="5" pattern="[a-zA-Z]*" #nom="ngModel" name="nameDiplome" id="nameDiplome" class="form-control" [ngClass]="{ 'a':nom.invalid}" placeholder=" Nom Diplome">
+			  <div *ngIf="nom.invalid" style="color: blue;">
+                <div *ngIf="nom.hasError('required')"> 
+                    Nom Diplome obligatoire !! 
+                </div>
+                <div *ngIf="nom.errors['minlength']">
+					Nom Diplome contient au minimum {{nom.errors?.['minlength'].requiredLength}} caratctères alors que vous avez écrit
+                    {{nom.errors?.['minlength'].actualLength}} !! 
+                </div>
+                <div *ngIf="nom.errors?.['pattern']"> 
+                    Nom Diplome ne doit contenir que des lettres  !!
+                </div>
+            </div>
+			</div>
+  
+			<div class="form-group">
+				<label for="inputState" > Option :</label>
+				<select type="opt" #opt="ngModel" [(ngModel)]="diplome.opt" name="opt" id="opt" class="form-control" [ngClass]="{ 'a':opt.invalid}"   required >
+					<option value=""  style="color:rgb(121, 121, 221); ;" >Select your option</option>
+					<option value="SE"  selected>SE</option>
+				  <option value="GAMIX">GAMIX</option>
+				  <option value="SIM">SIM</option>
+				  <option value="NIDS">NIDS</option>
+				  <option value="TWIN">TWIN</option>
+				  <option value="SLEAM">SLEAM</option>
+  
+				</select>
+
+				<div *ngIf="opt.invalid" style="color:  blue;">
+					<div *ngIf="opt.hasError('required')">
+						Option Diplome obligatoire !! 
+					</div>
+					</div>
+			  </div>
+
+			<div class="form-group">
+			  <label for="dateDiplome"> Date Diplome:</label>
+			  <input type="date" #dateDiplome="ngModel" [(ngModel)]="diplome.dateDiplome" name="dateDiplome" id="dateDiplome" class="form-control"  [ngStyle]="{ 'border-color':dateDiplome.invalid ?'rgb(239, 39, 193)' : ''}" required placeholder="Date Diplome">
+			  <div *ngIf="dateDiplome.invalid" style="color: blue;">
+				<div *ngIf="dateDiplome.hasError('required')"> 
+					Date Diplome obligatoire !! 
+				</div>
+				</div>
+			</div>
+
+
+			<br>
+			<input type="submit" value="save" class="btn btn-outline-secondary " style=" margin-left: 200px;"  >
+			 
+		  </form>
+		  </div>
+		</div>
+		  <br>
+		  <!--style="margin-left: 160px;"-->
+		  <div  class="col-lg-6" >
+			<img
+			src="../assets/images/ee.jpg"
+			class="card-img-top img-fluid w-500"
+			alt="..."
+
+		  />
+		</div>
+		</div>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+	 
+	</div>

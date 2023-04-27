@@ -1,0 +1,15 @@
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
+.bi-pencil-square{font-size: 22px;}
+.bi-trash{font-size: 21px;}
+.bi-eye-fill{font-size: 21px;}
+.bi-search{font-size: 21px;}
+.btn-close{
+    position: relative;
+    left: 18rem;
+}
+.card-header{
+    background-color: white;
+    
+    
+}

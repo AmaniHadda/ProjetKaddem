@@ -1,0 +1,63 @@
+<div class="container" >
+<!--<div class="card" style="border-color: aqua;">
+    <div class="card-body">
+        <h1 style=" color: blue; font-family: 'Helvetica Neue', sans-serif; font-size: 90px; font-weight: bold; letter-spacing: -1px; line-height: 1; text-align: center;">Connexion </h1>
+        <p style=" text-align: center;  font-family: Helvetica, Arial, fantasy;">Bienvenue dans notre application pour se connecter il suffit d'entrer votre nom et votre mot de passe !</p>
+        <form [formGroup]="myForm" (ngSubmit)="handleLogin()">
+          
+           <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Nom utilisateur</label>
+            <div class="col-sm-10">
+            <input type="text" formControlName="username" class="form-control">
+        </div></div>
+        <div class="mb-3 row">
+        <label for="" class="col-sm-2 col-form-label">Mot de passe</label>
+        <div class="col-sm-10">
+            <input type="password" formControlName="password" class="form-control">
+        </div></div>  <br>
+            <div style="display: flex;
+            justify-content: center;">
+                <button type="submit" class="button-63">Login</button>
+            </div>
+        </form>
+        <div class="text-danger" *ngIf="errorMessage">{{errorMessage}}</div>
+    </div>
+  </div>-->
+  <section class="vh-100">
+    <div class="container-fluid h-custom">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-md-9 col-lg-6 col-xl-5">
+          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+            class="img-fluid" alt="Sample image">
+        </div>
+        <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+          <form [formGroup]="myForm" (ngSubmit)="handleLogin()">
+            <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+              <p class="lead fw-normal mb-0 me-3" style=" color: blue; font-family: 'Helvetica Neue', sans-serif; font-size: 90px; font-weight: bold; letter-spacing: -1px; line-height: 1; text-align: center;">Connexion</p>             
+            </div>
+  
+            <div class="divider d-flex align-items-center my-4">
+              <p class="text-center fw-bold mx-3 mb-0">Bienvenue dans notre application</p>
+            </div>
+            <div class="form-outline mb-4">
+                <input type="text" id="form3Example3" formControlName="username" class="form-control form-control-lg" placeholder="Enter un nom valide">
+              <label class="form-label" for="form3Example3">Nom utilisateur</label>
+            </div>
+  
+            <!-- Password input -->
+            <div class="form-outline mb-3">
+                <input type="password" formControlName="password" id="form3Example4" class="form-control form-control-lg"
+                placeholder="Enter le mot de passe">
+              <label class="form-label" for="form3Example4">Mot de passe</label>
+            </div>
+  
+            <div class="text-center text-lg-start mt-4 pt-2" style="display: flex;
+            justify-content: center;">
+              <button type="submit" class="button-63" style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
+            </div> 
+            <div class="text-danger" *ngIf="errorMessage">{{errorMessage}}</div>
+          </form>
+        </div>
+      </div>
+    </div>   
+  </section></div>

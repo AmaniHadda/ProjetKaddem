@@ -1,0 +1,40 @@
+<form #f (ngSubmit)="onSubmit(f)">
+    <div >
+        <input type="text" class="form-control" required minlength="1" pattern="[a-zA-Z]+" name="nomDepart" [(ngModel)]="d.nomDepart" #nomDepart="ngModel" placeholder="Entrez le nom du département ..." [ngClass]="{'erreur':nomDepart.invalid && nomDepart.touched, 'changeBackground': nomDepart.valid}"></div>
+        <div *ngIf="nomDepart.invalid && nomDepart.dirty" >
+            <div *ngIf="nomDepart.hasError('required')" [ngStyle]="{ 'color': 'red','font-family': 'Helvetica, Arial, fantasy'}" > 
+                Le nom du département est obligatoire
+            </div>
+            <div *ngIf="nomDepart.hasError('minlength')" [ngStyle]="{ 'color': 'red','font-family': 'Helvetica, Arial, fantasy'}"> 
+                Le nom du département doit contenir au moins une lettre
+            </div>
+            <div *ngIf="nomDepart.errors?.['pattern']" [ngStyle]="{ 'color': 'red','font-family': 'Helvetica, Arial, fantasy'}" > 
+               Le nom du département ne doit contenir que des lettres 
+            </div>        
+        </div>  
+        <div [ngStyle]="{ 'color': 'red','font-family': 'Helvetica, Arial, fantasy'}"> 
+            {{msg}}
+         </div>
+         <br>
+        <div>
+            <select required name="typeDep" [(ngModel)]="d.typeDep" #typeDep="ngModel" class="form-control" [ngClass]="{'erreur':typeDep.invalid && typeDep.touched, 'changeBackground': typeDep.valid}">   
+                <option selected></option>
+                <option>Informatique</option>
+                <option>Chimie</option>
+                <option >Mathematique</option>
+                <option >Biologie</option>
+                <option >Economie</option>
+            </select>
+        </div>
+        <div *ngIf="typeDep.invalid && typeDep.dirty" >
+            <div *ngIf="typeDep.hasError('required')" [ngStyle]="{ 'color': 'red','font-family': 'Helvetica, Arial, fantasy'}" > 
+                La spécialité est obligatoire
+            </div>                  
+        </div>
+        <br>
+        <div>
+        <input [disabled]="nomDepart.invalid || typeDep.invalid" type="submit" value="Soumettre" class="btn btn-primary">&nbsp;&nbsp;&nbsp; 
+        <button class="btn btn-primary" (click)="cancel(f)" type="button" class="btn btn-danger">Annuler</button>  
+    </div>
+    
+</form>

@@ -1,0 +1,73 @@
+<div class="log">
+<h4 class="text-center pt-2">Ajout Professeur</h4>
+            <div class="container-fluid center offset-3">
+
+    <div class="row">
+        <div class=" col-md-12">
+            <div class="card w-50 ">
+                <div class="card-header w-100">
+                    <h4>Ajout Professeur
+                        <a routerLink="/listprof" class="btn btn-danger float-end">Retour</a>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <form  #f="ngForm"  (ngSubmit)="onSubmit()">
+     <div class="mb-2 w-100">
+        <label class="form-label">Nom</label>
+         <input type="text" class="form-control" required   pattern="[a-zA-Z]*" name="nom" [(ngModel)]="Prof.nomP" #first="ngModel">
+            <div *ngIf="first.invalid && first.touched" class="alert alert-danger">
+                <div *ngIf="first.hasError('required')" class=""> 
+                    Nom obligatoire
+                </div>
+                <div *ngIf="first.errors?.['pattern']"> 
+                    Le nom  ne doit contenir que des lettres 
+                </div>
+            </div>
+     </div>
+
+     <div class="mb-3 w-100">
+        <label class="form-label">Prenom</label>
+        <input type="text"   class="form-control" required  pattern="[a-zA-Z]*" name="prenom" [(ngModel)]="Prof.prenomP" #last="ngModel">
+               <div [hidden]="last.valid || last.untouched" class="alert alert-danger"> 
+                   Prenom  
+               </div>
+     </div>
+     <div class="mb-3 w-100">
+        <label class="form-label">Matiere</label>
+        <input type="text" class="form-control" required  pattern="[a-zA-Z]*" name="matiere" [(ngModel)]="Prof.matiere" #matiere="ngModel">
+            <div [hidden]="matiere.valid || matiere.untouched" class="alert alert-danger"> 
+                Matiere obligatoire
+            </div>
+     </div>
+     <div class="mb-3 w-100">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control"  required pattern="^[a-zA-Z0-9._-]+@gmail.com" name="email" [(ngModel)]="Prof.email" #email="ngModel">
+             <div *ngIf="email.hasError('pattern')" class="alert alert-danger">
+                 Schema incorrect
+              </div>
+              <div *ngIf="email.hasError('required') && email.touched" class="alert alert-danger">
+                 Email obligatoire
+              </div>
+     </div>
+    
+     <div class="mb-3 w-100">
+        <label class="form-label">Mot de passe</label>
+        <input type="password" class="form-control" pattern="^[a-zA-Z0-9]{8,}?" [(ngModel)]="Prof.password" #pass="ngModel" name="pwd">
+            <div *ngIf="pass.invalid " class="alert alert-danger">
+               <p>Votre mot de passe doit contenir :</p>
+                <ul>
+                <li> des Caractères minuscules de a à z non accentués</li>
+                <li> des Caractères majuscules de A à Z non accentués,</li>
+                <li> des Chiffres de 0 à 9</li>
+                <li> Au moins 8 caractères </li>   
+            </ul>  
+             </div>
+     </div>
+        <div class="mb-3 w-100">
+            <input class="btn btn-success" [disabled]="f.invalid" type="submit" value="Enregistrer" >
+    </div>
+
+   
+</form>
+</div>
+</div>

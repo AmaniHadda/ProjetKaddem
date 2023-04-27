@@ -1,0 +1,13 @@
+.search-hero {
+
+    display: flex;
+   
+  }
+  .table{
+    width: 60%;
+    margin: 10px 10px 20px;
+  }
+  .form-control  {
+    margin: 10px 10px 10px;
+
+  }

@@ -1,0 +1,251 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<br>
+<br>
+<div class="container">
+<div class="row">
+	<div class="col-lg-12">
+		<div id="comp-render" >
+
+		
+				 
+		 </div>
+		 
+		 <div class="row">
+		<div class="main-box clearfix col-lg-8">
+			<div class="table-responsive">
+				<div class="container">
+					
+					
+						
+					
+						<button class="btn btn-outline-secondary " style=" margin-left: 570px;" routerLink="formulairediplome" >+ Diplome</button>
+						<br>
+						<br>
+						
+					<app-details (Nombredip)="nbr=$event" [parentData]="title" >   </app-details> <div style="color:blue">{{nbr }} </div>
+					
+						<br>
+						<div class="search-name col-lg-12">
+							<input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="on" placeholder=" SEARCH  "> 
+							</div>
+							<br>
+							<h2 style="color:rgb(44, 54, 145)"> Liste des diplomes</h2>
+					</div>
+					
+				<table class="table table-striped">
+					<thead>
+						
+						<tr>
+							<th style="color:rgb(44, 54, 145)"><span>ID</span></th>
+							<th style="color:rgb(44, 54, 145)"><span>Name</span></th>
+							<th style="color:rgb(44, 54, 145)" ><span>Option</span></th>
+							<th style="color:rgb(44, 54, 145)"><span>DateDiplome</span></th>
+							<th style="color:rgb(44, 54, 145)">Modifier</th>
+							<th style="color:rgb(44, 54, 145)">Supprimer</th>
+							<th style="color:rgb(44, 54, 145)">Affecter</th>
+							<th style="color:rgb(44, 54, 145)">&nbsp;</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr  *ngFor="let d of liste |  filter:searchText | paginate: { itemsPerPage: 7, currentPage: p } ; let indexc= index ; ">
+							
+						<td>{{d.idDiplomes}}</td>
+						<td>{{d.nameDiplome}}</td>
+						<td>{{d.opt}}</td>
+						<td>{{d.dateDiplome}}</td>
+						<td><button type="button" class="btn btn-outline-primary mb-2" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="edit(d)" >Edit</button></td>
+						<td>
+							<button type="button" class="btn btn-outline-primary mb-2" (click)="deleteDiplome(d)">Delete</button>
+							</td>
+							<td>
+								<button type="button" class="btn btn-outline-primary mb-2" data-bs-toggle="modal" data-bs-target="#Affectation" [routerLink]="['affect',d.idDiplomes]">Assign to university </button>
+								</td>
+						</tr>
+						
+					</tbody>
+				</table>
+				
+			</div>
+			<pagination-controls (pageChange)="p = $event"></pagination-controls>
+		</div>
+		<br>
+		<br>
+<div class="col-lg-4" >
+	<div >
+
+		<div class="d-grid gap-2 col-6 mx-auto"> 
+			<button class="btn btn-outline-primary mb-2" data-bs-toggle="modal" data-bs-target="#getdiplomebyoption" > Diplome Par Option</button>
+		 </div>
+		 <br>
+		<br>
+		 <img
+		 src="../assets/images/mm.jpg"
+		 class="card-img-top img-fluid w-200 "
+		 alt="..."
+		
+	   />
+  <div class="card text-center" style="height: 460px">
+	<div class="card-header"style="height: 60px ; font-size: 20px" >
+	 Nombre des diplomes par Option  Entre :
+	</div>
+	<div class="card-body" >
+		<div class="form-group">
+		
+			<label for="date1">  Premier Date :</label>
+			<br>
+			<input type="date"  [(ngModel)]="date1"  required  name="date1" id="date1" class="form-control"  placeholder="  Premier Date ">
+		</div> 
+		<div class="form-group">
+			<br>
+			<label for="date2">  deuxieme Date :</label>
+			<br>
+			<input type="date"  [(ngModel)]="date2"  required  name="date2" id="date2" class="form-control"  placeholder=" deuxieme Date ">
+		</div> 
+		<br>
+		<button class="btn btn-secondary btn-lg"  (click)="getdiplomePrisEntreDeuxDatesParOptions(date1,date2)" > Diplome Par Specialite</button>
+	</div>
+	<div class="card-footer text-muted" style="height: 260px">
+		<div *ngFor="let m of mapObject |keyvalue">
+			<b> {{m.key}}  : </b>  <b>{{m.value}}</b>
+
+			
+			
+	 </div>
+	</div>
+  </div>
+	</div>
+
+	
+	
+
+</div>
+	</div>
+	</div>
+</div>
+<!--update-->
+<div>
+	
+	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<h5 class="modal-title" id="exampleModalLabel">Update Diplome</h5>
+			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		  </div>
+		  <div class="modal-body">
+	
+			<form #updateForm="ngForm" (ngSubmit)="updateDiplome()">
+			  <div class="form-group">
+				<label for="idDiplomes">Diplome Id :</label>
+				<input type="text" #idDiplomes [(ngModel)]="Update.idDiplomes" name="idDiplomes" disabled id="idDiplomes" class="form-control" placeholder="Diplome Id">
+			  </div>
+	
+			  <div class="form-group">
+				<label for="nameDiplome">Diplome Name :</label>
+				<input type="text" #nameDiplome [(ngModel)]="Update.nameDiplome" name="nameDiplome" id="nameDiplome" class="form-control" placeholder="Diplome prenomE">
+			  </div>
+	
+			 
+	
+				<div class="form-group">
+				  <label for="inputState" >Diplome Option :</label>
+				  <select type="opt" #opt [(ngModel)]="Update.opt" name="opt" id="opt" class="form-control"  required >
+					<option value="SE" selected>SE</option>
+					<option value="GAMIX">GAMIX</option>
+					<option value="SIM">SIM</option>
+					<option value="NIDS">NIDS</option>
+					<option value="TWIN">TWIN</option>
+					<option value="SLEAM">SLEAM</option>
+	
+				  </select>
+				</div>
+	
+				<div class="form-group">
+				  <label class="dateDiplome" for="dateDiplome"> Date Diplome :</label>
+				  <input type="date" #dateDiplome [(ngModel)]="Update.dateDiplome" name="dateDiplome" id="dateDiplome" class="form-control"
+					placeholder="Date Diplome">
+				</div>
+	
+			
+				<div class="form-group">
+	
+				<input type="submit" value="Update" class="btn btn-outline-secondary w-100" >
+					</div>
+			</form>
+			
+		  </div>
+	
+		</div>
+	  </div>
+	</div>
+	</div>
+<!--getdiplomebyoption-->
+<div class="modal fade" id="getdiplomebyoption" tabindex="-1" aria-labelledby="getdiplomebyoptionLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="getdiplomebyoptionLabel">List Of Diplome</h5>
+		  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		</div>
+		
+		<div class="form-group">
+			
+		<select type="opt" #opt [(ngModel)]="diplomeByOption.opt" name="opt" id="opt" class="form-control" ngModel #op="ngModel" (click)="getdiplomebyoption(diplomeByOption.opt)" required  >
+				
+				<option value=""  style="color:brown ;" >Select your option</option>
+				<option *ngFor ="let opp of Optio"  [value]="opp.opt">{{opp.opt}}</option>
+				
+				
+			</select>
+			<!--<option value="SE" selected>SE</option>
+			  <option value="GAMIX">GAMIX</option>
+			  <option value="SIM">SIM</option>
+			  <option value="NIDS">NIDS</option>
+			  <option value="TWIN">TWIN</option>
+			  <option value="SLEAM">SLEAM</option>-->
+
+		
+			
+		  </div>
+		 
+ 	<table class="table user-list" [hidden]="op.invalid">
+			<thead>
+				<tr>
+					<th><span>ID</span></th>
+					<th><span>Name</span></th>
+					<th><span>DateDiplome</span></th>
+					<th>&nbsp;</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr  *ngFor="let d of liste |  filter:searchText ; let indexc= index">
+					
+				<td>{{d.idDiplomes}}</td>
+				<td>{{d.nameDiplome}}</td>
+				<td>{{d.dateDiplome}}</td>
+				
+				
+				</tr>
+				
+			</tbody>
+		</table>
+
+	  </div>
+	</div>
+  </div>
+  <!--Affectation-->
+
+  <div class="modal fade" id="Affectation" tabindex="-1" aria-labelledby="AffectationLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		
+             
+			<router-outlet></router-outlet>
+	  
+	  </div>
+	</div>
+  </div>
+
+</div>
+
+

@@ -1,0 +1,51 @@
+<hr>
+<button
+		type="button"
+		class="btn btn-outline-primary ms-2"
+		(click)="isCollapsed = ! isCollapsed"
+		[attr.aria-expanded]="!isCollapsed"
+		aria-controls="collapseExample"
+	>
+	Chercher les salles selon la capacité
+	</button>
+	<div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+		<div class="card">
+			<div class="card-body">
+				<form [formGroup]="myForm" (ngSubmit)="Find()">
+					Numero 1: <input type="number" formControlName="a" class="form-control"> 
+					<div *ngIf="a.invalid && a.touched">
+						<div *ngIf="a.errors['required']" [ngStyle]="{ 'color': 'red','font-family': 'Helvetica, Arial, fantasy'}">
+							Numero obligatoire 
+						</div></div>
+					Numero 2: <input type="number" formControlName="b" class="form-control">
+					<div *ngIf="b.invalid && b.touched ">
+						<div *ngIf="b.errors['required']" [ngStyle]="{ 'color': 'red','font-family': 'Helvetica, Arial, fantasy'}">
+							Numero obligatoire 
+						</div></div>
+						<input type="submit" value ="Chercher" class="btn btn-warning">
+				</form>
+		</div>
+	</div>
+	</div>
+<hr>
+<table class="table table-striped" [hidden]="hide">
+	<thead>
+		<tr>
+			<th scope="col">#</th>
+			<th scope="col" >Salle</th>
+			<th scope="col" >Capacité</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let i of list; let in=index;">
+			<th >{{ in+1 }}</th>			
+			<td>{{ i.numSalle }}</td>
+			<td>{{ i.capacite}}</td>
+            <td>
+                <button (click)="desaffecter(i.idSalle)" class="btn btn-danger">Supprimer</button>
+            </td>
+		</tr>
+	</tbody>
+</table>
+
+

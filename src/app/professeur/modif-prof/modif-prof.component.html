@@ -1,0 +1,133 @@
+ <!-- <h3 class="text-center pt-3">Modification Professeur</h3>
+<div class="container-fluid offset-4">
+<form  #f="ngForm" (ngSubmit)="onSubmite()">
+  
+    <table>
+        <tr>
+            <td><label class="form-label">Nom</label></td>
+            <td><input type="text" required class="form-control" pattern="[a-zA-Z]*" name="nom" [(ngModel)]="Prof.nomP" #first="ngModel">
+            <div *ngIf="first.invalid">
+                <div *ngIf="first.hasError('required')"> 
+                    Nom obligatoire
+                </div>
+    
+                <div *ngIf="first.errors?.['pattern']"> 
+                    Le nom  ne doit contenir que des lettres 
+                </div>
+            </div>
+                
+            </td>
+        </tr>
+        <tr>
+            <td><label class="form-label">Prenom</label></td>
+            <td><input type="text" required class="form-control" pattern="[a-zA-Z]*" name="prenom" [(ngModel)]="Prof.prenomP" #last="ngModel">
+                <div [hidden]="last.valid"> 
+                    Prenom obligatoire
+                </div></td>
+        
+        </tr>
+        <tr>
+            <td><label class="form-label">Matiere</label></td>
+            <td><input type="text" required class="form-control" pattern="[a-zA-Z]*" name="matiere" [(ngModel)]="Prof.matiere" #matiere="ngModel">
+                <div [hidden]="matiere.valid"> 
+                    Matiere obligatoire
+                </div></td>
+        
+        </tr>
+        <tr>
+            <td><label class="form-label">Email</label></td>
+            <td><input type="email" class="form-control" required pattern="^[a-zA-Z0-9._-]+@gmail.com" name="email" [(ngModel)]="Prof.email" #email="ngModel">
+                <div *ngIf="email.hasError('pattern')">
+                    Schema incorrect
+                 </div>
+                 <div *ngIf="email.hasError('required')">
+                    Email obligatoire
+                 </div>
+            </td>
+        </tr>
+       
+        <tr>
+            <td><label class="form-label">Mot_de_passe</label></td>
+            <td><input type="password" class="form-control" pattern="^[a-zA-Z0-9]{8,}?" [(ngModel)]="Prof.password" #pass="ngModel" name="pwd">
+                <div *ngIf="pass.invalid">
+    
+                   <p>Votre mot de passe doit contenir :</p>
+                    <ul>
+                    <li> des Caractères minuscules de a à z non accentués</li>
+                    <li> des Caractères majuscules de A à Z non accentués,</li>
+                    <li> des Chiffres de 0 à 9</li>
+                    <li> Au moins 8 caractères </li>   
+                </ul>  
+                 </div>
+            </td>
+        </tr>
+    <div class="text-center ms-5 ps-3">
+        <tr>
+            <td><input class="btn btn-success"  type="submit" value="Enregistrer"></td>
+        </tr>
+    </div>
+    </table>
+</form>
+
+</div>  -->
+<h3 class="text-center pt-2">Modification Professeur</h3>
+<div class="container-fluid center w-75 h-75 offset-4">
+    <div class="row">
+        <div class=" col-md-12">
+            <div class="card w-50 ">
+                <div class="card-header w-100">
+                    <h4>Modification Professeur
+                        <a routerLink="/admin/bacary" class="btn btn-danger float-end">Retour</a>
+                    </h4>
+                </div>
+                <div class="card-body">
+                <form [formGroup]="myform" (ngSubmit)="onSubmite()">
+    <div class="mb-2 w-100">
+        <label class="form-label" for="firstname">Nom</label>
+         <input type="text" formControlName="nomP"  [(ngModel)]="Prof.nomP" class="form-control" id="nomP">
+    </div>
+    <div *ngIf="nomP.errors?.['required']" class="alert alert-danger" role="alert">
+       Nom obligatoire
+    </div>
+    <div class="mb-3 w-100">
+
+    <div>
+        <label  class="form-label" for="firstname">Prenom</label>
+         <input type="text" formControlName="prenomP"  [(ngModel)]="Prof.prenomP" class="form-control" id="nomP">
+    </div>
+    <div *ngIf="prenomP.errors?.['required']" class="alert alert-danger" role="alert">
+       Prenom obligatoire
+    </div>
+</div>
+
+    <div class="mb-3 w-100">
+        <label for="firstname">Matiere</label>
+         <input type="text" formControlName="matiere"  [(ngModel)]="Prof.matiere" class="form-control" id="nomP">
+    </div>
+    <div *ngIf="matiere.errors?.['required']" class="alert alert-danger" role="alert">
+       Matiere obligatoire
+    </div>
+
+    <div class="mb-3 w-100">
+        <label class="form-label" for="firstname">Email</label>
+         <input type="text" formControlName="email"  [(ngModel)]="Prof.email" class="form-control" id="nomP">
+    </div>
+    <div *ngIf="email.errors?.['required']" class="alert alert-danger" role="alert">
+       Email obligatoire
+    </div>
+
+    <div class="mb-3 w-100">
+        <label class="form-label" for="Mot_de_passe">Mot_de_passe</label>
+         <input type="text" formControlName="password"  [(ngModel)]="Prof.password" class="form-control" id="nomP">
+    </div>
+    <div *ngIf="nomP.errors?.['required']" class="alert alert-danger" role="alert">
+       Mot_de_passe obligatoire
+    </div>
+    <div class="alert alert-danger" role="alert" *ngIf="password.errors?.['pattern']">
+        Il faut respecter le format requis
+    </div>
+    <div class="mb-3 w-100">
+    <input type="submit" class="btn btn-success" value="Modifier">
+</div>
+</form> 
+

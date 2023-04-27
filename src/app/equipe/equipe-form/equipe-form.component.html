@@ -1,0 +1,100 @@
+<form #f="ngForm" (ngSubmit)="onSubmit()" class="m-5 ">
+    <div class="form-row" ngModelGroup="firstInfo" #eq="ngModelGroup">
+      <div class="mb-3">
+        <label for="validationDefault01">Nom d'Equipe</label>
+        
+        <input type="text" class="form-control" [ngClass]="{'is-invalid':NomE.errors && NomE.touched,'is-valid':NomE.valid}" placeholder="Entrer le nom de votre equipe" name="nomEquipe" minlength="5" pattern="[a-zA-Z' ']*" required [(ngModel)]="equipe.nomEquipe" #NomE="ngModel">
+
+        <div *ngIf="NomE.invalid && NomE.touched" class="text-danger">
+          <div *ngIf="NomE.errors?.['required']" > 
+            Nom d'Equipe obligatoire
+          </div>
+          <div *ngIf="NomE.errors['minlength']"> 
+              FirstName contient au minimum 5 caratctères 
+          </div>
+          <div *ngIf="NomE.errors?.['pattern']"> 
+            Nom d'Equipe ne doit contenir que des lettres 
+          </div>
+      </div>
+      </div>
+      <div class="mb-3">
+        <label for="validationDefault02">Role</label>
+        <input type="text" class="form-control" [ngClass]="{'is-invalid':role.errors && role.touched,'is-valid':role.valid}" placeholder="Entrer le role de votre equipe" name="specialite" pattern="[a-zA-Z' ']*" required [(ngModel)]="equipe.role" #role="ngModel">
+        <div *ngIf="role.invalid && role.touched" class="text-danger">
+          <div *ngIf="role.errors?.['required']" > 
+            Role obligatoire
+          </div>
+          <div *ngIf="role.errors?.['pattern']"> 
+            Role ne doit contenir que des lettres 
+          </div>
+      </div>
+      </div>
+      <div class="mb-3">
+        <label>Image de l'equipe :</label>
+        <input type="file" class="form-control" [ngClass]="{'is-invalid':image.errors && image.touched,'is-valid':image.valid}" name="image" required [(ngModel)]="equipe.img" #image="ngModel">
+        <div *ngIf="image.invalid && image.touched" class="text-danger">
+            Image obligatoire
+          </div>
+      </div>
+      <div class="mb-3 form-group">
+        <label for="exampleFormControlSelect1">Niveau</label>
+        <select class="form-select" [ngClass]="{'is-invalid':NivE.errors && NivE.touched,'is-valid':NivE.valid}" aria-label="Default select example" name="niveau" required [(ngModel)]="equipe.niveau" #NivE="ngModel">
+          <option value="JUNIOR">JUNIOR</option>
+          <option value="SENIOR">SENIOR</option>
+          <option value="EXPERT">EXPERT</option>
+        </select>
+        <div *ngIf="NivE.invalid && NivE.touched" class="text-danger">
+          Niveau obligatoire
+        </div>
+      </div>
+    </div>
+
+
+
+      <div *ngIf="eq.valid" class="form-row">
+       <div class="h5 pb-2 mb-3 mt-4 text-dark border-bottom border-dark">
+       <label>Details Equipe {{equipe.nomEquipe}} :</label>
+      </div> 
+      <div class="mb-3">
+        <label for="validationDefault02">Salle</label>
+        <input type="number" class="form-control" [ngClass]="{'is-invalid':salle.errors && salle.touched,'is-valid':salle.valid}" placeholder="Entrer la salle de votre equipe" name="salle" max="999" required [(ngModel)]="equipe.salle" #salle="ngModel">
+        <div *ngIf="salle.invalid && salle.touched" class="text-danger">
+          <div *ngIf="salle.errors?.['required']" > 
+            Salle obligatoire
+          </div>
+          <div *ngIf="salle.errors?.['max']"> 
+            Salle ne doit pas depasser 999 
+          </div>
+      </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="validationDefault02">thematique</label>
+        <input type="text" class="form-control" [ngClass]="{'is-invalid':thema.errors && thema.touched,'is-valid':thema.valid}" placeholder="Entrer la thematique  de votre equipe" name="thematique" pattern="[a-zA-Z' ']*" required [(ngModel)]="equipe.thematique" #thema="ngModel">
+        <div *ngIf="thema.invalid && thema.touched" class="text-danger">
+          <div *ngIf="thema.errors?.['required']" > 
+            thematique obligatoire
+          </div>
+          <div *ngIf="thema.errors?.['pattern']"> 
+            thematique ne doit contenir que des lettres 
+          </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+        <label class="form-check-label " for="invalidCheck2">
+          Agree to terms and conditions
+        </label>
+      </div>
+    </div>
+    <div class="d-flex justify-content-start">
+      <div>
+      <input class="btn btn-primary mt-3" [disabled]="f.invalid" type="submit" value="Enregister">
+      </div>
+      <div class="text-success mt-4 mx-3">{{Message}}</div>
+    </div>
+  </form>
+ 

@@ -1,0 +1,22 @@
+<form [formGroup]="myForm">
+    <button type="button" (click)="Addnewrow()" class="btn btn-info">Ajouter Salle</button>
+    <div formArrayName="SalleArray">
+   <div *ngFor="let item of SalleArray.controls; let i=index" [formGroupName]="i" >
+     Salle : {{ i+1 }}
+      <br/>
+    Numéro de la salle <input type="text" class="form-control" formControlName="numSalle" >
+    <div *ngIf="SalleArray.controls[i].get('numSalle').invalid && SalleArray.controls[i].get('numSalle').touched" >
+      <div *ngIf="SalleArray.controls[i].get('numSalle').errors?.['required']" [ngStyle]="{ 'color': 'red','font-family': 'Helvetica, Arial, fantasy'}" > 
+          Le numéro de la salle est obligatoire
+      </div>  
+  </div> 
+    Capacité <input type="number" class="form-control" formControlName="capacite" >
+    <div *ngIf="SalleArray.controls[i].get('capacite').invalid && SalleArray.controls[i].get('capacite').touched" >
+      <div *ngIf="SalleArray.controls[i].get('capacite').errors?.['required']" [ngStyle]="{ 'color': 'red','font-family': 'Helvetica, Arial, fantasy'}" > 
+          La capacite est obligatoire
+      </div>       
+  </div> 
+   </div></div>
+   <br/>
+   <button (click)="add()" type="submit" class="btn btn-success" routerLink="/admin/departement">Soumettre</button>
+</form>

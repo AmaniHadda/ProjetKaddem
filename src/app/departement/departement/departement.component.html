@@ -1,0 +1,106 @@
+<div class="container">
+
+<br>
+<div class="row align-items-start">
+	<div class="col">
+<div class="card">
+	<div class="card-header">Nombre des départements par spécialité</div>
+	<div class="card-body">
+		<ul class="list-inline">
+			<li class="list-inline-item">&bull; Informatique : {{type1}}</li>
+			<li class="list-inline-item">&bull;  Chimie : {{type2}}</li>
+			<li class="list-inline-item">&bull; Biologie : {{type3}}</li>
+			<li class="list-inline-item">&bull; Mathématique : {{type4}}</li>
+			<li class="list-inline-item">&bull; Economie : {{type5}}</li>
+		  </ul>
+	</div></div>
+  </div></div>
+<br>
+<div class="row align-items-start">
+<div class="col-8">
+	<div class="card bg-light mb-3">
+		<div class="search-hero">
+			<input class="form-control" style="width: 500px;" type="text" name="search" [(ngModel)]="searchText" autocomplete="on" placeholder="Rechercher un departement ">			
+		</div>		
+		<table class="table table-striped" style="width: 90% ;">
+			<thead>
+				<tr>
+					<th scope="col"></th>
+					<th scope="col">Nom Departement</th>
+					<th scope="col">Specialité Departement</th>
+					<th scope="col"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let d of list | filter:searchText | paginate: { itemsPerPage: 5, currentPage: p}; let i=index;">
+					<th>{{i+1}}</th>	
+					<td>
+						{{d.nomDepart | uppercase }}
+					</td>
+					<td>
+						{{d.typeDep }}
+					</td>
+					<td>
+						<ng-template #content let-modal>
+							<div class="modal-header">
+								<h4 class="modal-title" id="modal-basic-title">Details du département {{d.nomDepart | uppercase}}</h4>
+								<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+							</div>
+							<div class="modal-body">
+								<form>
+									<div class="mb-3">
+										<p>Département {{d.typeDep}}</p>
+										<p>Le nombre des salles du département: {{message}}</p>
+										<p>Le nombre des étudiants : {{etud}}</p>
+										<app-salles [iddept]="d.idDepart"></app-salles>
+									</div>
+								</form>
+							</div>	
+						</ng-template>
+						<ng-template #salles let-modal>
+							<div class="modal-header">
+								<h4 class="modal-title" id="modal-basic-titlee">Affecter des salles</h4>
+								<button type="button" class="btn-close" aria-label="Close" [routerLink]="['/departement']" (click)="modal.dismiss('Cross click')"></button>
+							</div>
+							<div class="modal-body">
+								<form>
+									<div class="mb-3">
+										<app-salles-affect [id]="d.idDepart"></app-salles-affect>
+									</div>
+								</form>
+							</div>	
+						</ng-template>
+							<button class="btn btn-outline-danger" [routerLink]="['update',d.idDepart]" (click)="opened()">Modifier</button>&nbsp;
+							<button class="btn btn-outline-success" (click)="deleteDepartement(d)">Supprimer</button>&nbsp;					
+							<button class="btn btn-outline-info" (click)="open(content, d)">Details</button>&nbsp;	
+							<button class="btn btn-outline-warning" (click)=" opensalles(salles)" >Salles</button>			
+				   </td>
+				</tr>
+			</tbody>
+		</table>
+		<pagination-controls (pageChange)="p =$event"></pagination-controls>
+	</div>
+</div>
+	<div class="col-4">
+		<div class="card bg-light mb-3" >
+			<img
+			src="../../../assets/images/dept.jpeg"
+			class="card-img-top img-fluid "
+			alt="..."
+			style="width : 100%;
+			height : 200px;"
+		  />
+			<div class="card-header">				
+				<h3>{{titre}} département</h3>
+			</div>
+			<div class="card-body">
+				<div *ngIf="isAddMode">
+				<app-form-departement (change)="titre===$event"></app-form-departement>
+			</div>
+			<div *ngIf="!isAddMode">
+				<router-outlet></router-outlet>
+			</div>
+			</div>
+		  </div>		
+	</div>
+</div></div>

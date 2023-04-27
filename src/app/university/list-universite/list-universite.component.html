@@ -1,0 +1,68 @@
+<div class="container">
+    <br>
+    <br>
+<div class="row align-items-start">
+    <div class="col-8">
+    <h1>Ajouter Universite</h1>
+    <form [formGroup]="myForm">
+        <div formGroupName="details">
+       
+        <div class="col-md-6">
+        Nom Universite :<input type="text" class="form-control" formControlName="nomUniv"  [(ngModel)]="univ.nomUniv">
+        <div *ngIf="NomUniversite.invalid">
+            <div *ngIf="NomUniversite.errors?.['required']" class="alert alert-danger" role="alert"> 
+                Nom Universite obligatoire
+            </div>
+       
+        <div *ngIf="NomUniversite.errors?.['minlength']" class="alert alert-danger" role="alert"> 
+            Le  Nom Universite contient au minimum {{NomUniversite.errors?.['minlength'].requiredLength}} caratctères alors que vous avez écrit
+            {{NomUniversite.errors?.['minlength'].actualLength}}
+       
+        </div>
+    </div>
+        </div>
+     
+        <br>
+        <button type="submit"  class="btn btn-outline-secondary " style=" margin-left: 100px;"  (click)="onsubmit()" >save</button>
+     
+        </div>
+    </form>     
+   
+    <h1>Liste des Universites</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nom Universite</th>
+                <th style="color:rgb(44, 54, 145)">Supprimer</th>
+                <th style="color:rgb(44, 54, 145)">&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let u of listt ;">
+                <td> {{ u.idUniv }}</td>
+                <td>{{ u.nomUniv }}</td>
+                <td>
+                    <button type="button" class="btn btn-outline-primary mb-2" (click)="deleteuniv(u)">Delete</button>
+                    </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="col-4">
+<br>
+<br>
+<br>
+<br>
+    <img
+    src="../assets/images/univ-removebg-preview.png"
+    class="card-img-top img-fluid w-200 "
+    alt="..."
+   
+  />
+</div></div></div>
+
+
+        
+   
+    
